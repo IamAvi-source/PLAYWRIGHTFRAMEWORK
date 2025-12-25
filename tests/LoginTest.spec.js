@@ -10,7 +10,6 @@ test.beforeEach(async({page})=>{
 
 });
 
-
 test('LoginTest @smoke@loginModule',async({page})=>{
 
     let loginPage=new LoginPage(page);
