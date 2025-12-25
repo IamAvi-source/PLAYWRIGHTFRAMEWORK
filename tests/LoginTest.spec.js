@@ -24,7 +24,7 @@ test('InvalidLoginTest @regression@loginModule',async({page})=>{
 
 });
 
-test.only('orangeHRMLink @regression@loginModule',async({page})=>{
+test('orangeHRMLink @regression@loginModule',async({page})=>{
     let loginPage=new LoginPage(page);
     await loginPage.openOrangeHRMLink();
     await page.waitForTimeout(3000)
