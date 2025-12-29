@@ -11,7 +11,7 @@ test.beforeEach(async({page})=>{
 test('AddProductToCartTest',async({page})=>{
 
     const loginPage=new LoginPage(page);
-    await loginPage.userlogin('pavanol','test@123');
+    await loginPage.validUserLogin('pavanol','test@123');
     await page.waitForTimeout(3000);
 
     const homePage=new HomePage(page);

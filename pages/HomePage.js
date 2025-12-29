@@ -14,20 +14,7 @@ class HomePage{
 
     async addProductToCart(productName)
     {
-        const products=await this.page.$$(this.productlist);
-        for(const product of products)
-        {
-            if(productName==await product.textContent())
-            {
-                await product.click();
-                break;
-            }
-        }
-        await this.page.on('dialog', async dialog => {
-            if (dialog.message().includes('Product added')) {
-                await dialog.accept();    
-            }
-        });
+        
     }
 
     async goToCart(productName)

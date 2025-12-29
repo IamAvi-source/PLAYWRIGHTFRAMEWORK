@@ -80,3 +80,34 @@ npx playwright test --debug
 # 14️⃣ Show all CLI options
 # Always useful to see available flags and latest options
 npx playwright test --help
+
+# ----------------------------------------------
+# How to run all login Test cases in Docker
+# docker run --rm playwright-tests npx playwright test tests/LoginTest.spec.js
+
+# ----------------------------------------------
+# This will execute all test cases in shards and in parallel container
+# Start-Job { docker run --rm pw-login-tests npx playwright test tests/LoginTest.spec.js --project=chromium --shard=1/2 } ; Start-Job { docker run --rm pw-login-tests npx playwright test tests/LoginTest.spec.js --project=chromium --shard=2/2 } ; Get-Job | Wait-Job | Receive-Job
+
+# --------------------------------------------------
+# Single command to execute all test cases in parallel container in shards in FIREFOX, CHROMIUN, WEBKIT(all PARALLEL)
+# Start-Job { docker run --rm pw-login-tests npx playwright test tests/LoginTest.spec.js --project=chromium --shard=1/2 } ;
+# Start-Job { docker run --rm pw-login-tests npx playwright test tests/LoginTest.spec.js --project=chromium --shard=2/2 } ;
+# Start-Job { docker run --rm pw-login-tests npx playwright test tests/LoginTest.spec.js --project=firefox --shard=1/2 } ;
+# Start-Job { docker run --rm pw-login-tests npx playwright test tests/LoginTest.spec.js --project=firefox --shard=2/2 } ;
+# Start-Job { docker run --rm pw-login-tests npx playwright test tests/LoginTest.spec.js --project=webkit --shard=1/2 } ;
+# Start-Job { docker run --rm pw-login-tests npx playwright test tests/LoginTest.spec.js --project=webkit --shard=2/2 } ;
+# Get-Job | Wait-Job | Receive-Job
+
+# --------------------------------------------------------------------
+# To execute above commands with HTML report after execution--- report will be saved in "playwright-report" folder
+# PowerShell command
+Start-Job { docker run --rm -v ${PWD}/playwright-report:/app/playwright-report pw-login-tests npx playwright test tests/LoginTest.spec.js --project=chromium --shard=1/2 --reporter=html } ;
+Start-Job { docker run --rm -v ${PWD}/playwright-report:/app/playwright-report pw-login-tests npx playwright test tests/LoginTest.spec.js --project=chromium --shard=2/2 --reporter=html } ;
+Start-Job { docker run --rm -v ${PWD}/playwright-report:/app/playwright-report pw-login-tests npx playwright test tests/LoginTest.spec.js --project=firefox --shard=1/2 --reporter=html } ;
+Start-Job { docker run --rm -v ${PWD}/playwright-report:/app/playwright-report pw-login-tests npx playwright test tests/LoginTest.spec.js --project=firefox --shard=2/2 --reporter=html } ;
+Start-Job { docker run --rm -v ${PWD}/playwright-report:/app/playwright-report pw-login-tests npx playwright test tests/LoginTest.spec.js --project=webkit --shard=1/2 --reporter=html } ;
+Start-Job { docker run --rm -v ${PWD}/playwright-report:/app/playwright-report pw-login-tests npx playwright test tests/LoginTest.spec.js --project=webkit --shard=2/2 --reporter=html } ;
+Get-Job | Wait-Job | Receive-Job
+
+

@@ -17,6 +17,16 @@ export default defineConfig({
   /* Run tests in files in parallel */
   fullyParallel: true,
 
+ 
+
+  //Execute test cases on specific browser
+//   projects: [
+//   {
+//     name: 'chromium',
+//     use: { browserName: 'chromium' },
+//   }
+// ],
+
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
 
@@ -41,11 +51,13 @@ export default defineConfig({
      baseURL: 'https://opensource-demo.orangehrmlive.com/web/index.php/auth/login',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    retries:2,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     actionTimeout: 20000,
-    navigationTimeout: 30000,
+    navigationTimeout: 60000,
+     ignoreHTTPSErrors: true,
     
   },
 
