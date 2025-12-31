@@ -1,6 +1,7 @@
 import {test,expect} from '@playwright/test';
 import {HomePage} from '../pages/HomePage.js';
 import {LoginPage} from '../pages/LoginPage.js';  
+import testData from '../data/testData.json';
 
 test.beforeEach(async({page})=>{
 
@@ -8,14 +9,12 @@ test.beforeEach(async({page})=>{
 
 });
 
-test('AddProductToCartTest',async({page})=>{
+test('adminLink',async({page})=>{
 
     const loginPage=new LoginPage(page);
-    await loginPage.validUserLogin('pavanol','test@123');
-    await page.waitForTimeout(3000);
+    const homePage=new HomePage(page)
+    await loginPage.validUserLogin(testData.validUser.username,testData.validUser.password);
+    await homePage.adminLinkFunctionality()
+   
 
-    const homePage=new HomePage(page);
-    await homePage.addProductToCart('Nexus 6');
-    await page.waitForTimeout(3000);
-    await homePage.goToCart('Nexus 6');
 });

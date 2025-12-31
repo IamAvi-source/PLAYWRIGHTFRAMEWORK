@@ -9,20 +9,21 @@ class HomePage{
         this.addToCartButton='//a[text()="Add to cart"]';
         this.cart='[id="cartur"]';
         this.proAddedConfirmation='[src="imgs/Nexus_6.jpg"]';
-        this.loginPage=new LoginPage(page);
+        this.adminLink='[href="/web/index.php/admin/viewAdminModule"]'
+        this.usernameField='(//input[@class="oxd-input oxd-input--active"])[2]'
+        this.userRoleAdminDropdown='(//div[@class="oxd-select-text oxd-select-text--active"])[1]'
+        this.adminValue='(//span[text()="Admin"])[2]'
+        this.employeeNameField='//input[@placeholder="Type for hints..."]'
+        this.statusDropdown='(//div[@class="oxd-select-text oxd-select-text--active"])[2]'
+        this.elabledOption='//span[text()="Enabled"]'
+        this.searchButton='//button[@type="submit"]'
+        this.loginPage=new LoginPage(page); // this will enable to use the locators from login class
     }
 
-    async addProductToCart(productName)
+    async adminLinkFunctionality()
     {
-        
+        await this.page.click(this.adminLink);
+        await expect(this.page.locator(this.usernameField)).toBeVisible();
     }
-
-    async goToCart(productName)
-    {
-        await this.page.click(this.cart);
-
-        // Wait for the cart page to load and check for the product name
-        const productInCart = this.page.locator(`td:has-text(\"${productName}\")`);
-        await expect(productInCart).toBeVisible();
-    }    
+  
 }
